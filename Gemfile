@@ -14,6 +14,10 @@ gem 'devise'
 
 gem 'state_machine', :require => 'state_machine/core'
 
+gem 'carrierwave'
+
+gem 'mini_magick'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
