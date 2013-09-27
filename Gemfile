@@ -12,6 +12,8 @@ gem 'simple_form'
 
 gem 'devise'
 
+gem 'table_print'
+
 gem 'state_machine', :require => 'state_machine/core'
 
 gem 'carrierwave'
