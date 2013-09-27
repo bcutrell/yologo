@@ -3,12 +3,43 @@
 <head>
   <title>Yologo</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <%= link_to "YOLOGO", root_path, class: "brand" %>
 
-</body>
-</html>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <%- if !user_signed_in? -%>
+            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+            <%- else -%>
+            <li><%= link_to 'Sign Out', '#' %></li>
+            <%- end -%>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <% flash.each do |name, msg| %>
+    <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+      <a class="close" data-dismiss="alert">×</a>
+      <%= msg %>
+    </div>
+    <% end %>
+
+    <%= yield %>
+
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  </body>
+  </html>
