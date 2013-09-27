@@ -6,6 +6,14 @@ gem 'rails', '4.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+gem 'bootstrap-sass', '~> 2.3.2.1'
+
+gem 'simple_form'
+
+gem 'devise'
+
+gem 'state_machine', :require => 'state_machine/core'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
