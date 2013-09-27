@@ -6,7 +6,6 @@ gem 'rails', '4.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-
 gem 'bootstrap-sass', '~> 2.3.2.1'
 
 gem 'simple_form'

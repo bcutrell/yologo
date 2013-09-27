@@ -16,8 +16,8 @@ feature 'sign up' do
     fill_in 'Email', with: 'user@example.com'
     fill_in 'Username', with: 'John'
     fill_in 'user_password', with: 'password'
-    fill_in 'Password Confirmation', with: 'password'
-    click_button 'Sign Up'
+    fill_in 'Password confirmation', with: 'password'
+    click_button 'Sign up'
     expect(page).to have_content("Welcome to Yologo")
     expect(page).to have_content('Sign Out')
   end
@@ -25,7 +25,7 @@ feature 'sign up' do
   scenario 'with missing information' do
     visit root_path
     click_link 'Sign Up'
-    click_button 'Sign Up'
+    click_button 'Sign up'
     expect(page).to have_content("can't be blank")
   end
 
@@ -33,8 +33,8 @@ feature 'sign up' do
     visit root_path
     click_link 'Sign Up'
     fill_in 'user_password', with: 'password'
-    fill_in 'Password Confirmation', with: 'something different'
-    click_button 'Sign Up'
+    fill_in 'Password confirmation', with: 'something different'
+    click_button 'Sign up'
     expect(page).to have_content("doesn't match")
   end
 
