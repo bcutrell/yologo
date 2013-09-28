@@ -12,7 +12,13 @@ gem 'simple_form'
 
 gem 'devise'
 
+gem 'table_print'
+
 gem 'state_machine', :require => 'state_machine/core'
+
+gem 'carrierwave'
+
+gem 'mini_magick'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
