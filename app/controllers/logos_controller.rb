@@ -1,6 +1,10 @@
 class LogosController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @logos = Logo.all
+  end
+
   def new
     @logo = Logo.new
   end
@@ -9,7 +13,7 @@ class LogosController < ApplicationController
     @logo = Logo.new(logo_params)
 
     if @logo.save
-      redirect_to logos_path, notice: "Logo was successfully uploaded"
+      redirect_to root_path, notice: "Logo was successfully uploaded"
     else
       render action: 'new'
     end
