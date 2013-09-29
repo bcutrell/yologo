@@ -2,7 +2,7 @@ class LogosController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @logos = Logo.all
+    @logos = Logo.page params[:page]
   end
 
   def new
