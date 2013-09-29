@@ -1,5 +1,5 @@
 class LogosController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:new]
 
   def index
     @logos = Logo.page params[:page]
