@@ -15,3 +15,7 @@
 /log/*.log
 /tmp
 /config/database.yml
+
+/app/assets/images
+
+/spec/support/logo_images
