@@ -19,3 +19,5 @@
 /app/assets/images
 
 /spec/support/logo_images
+
+/public/uploads
