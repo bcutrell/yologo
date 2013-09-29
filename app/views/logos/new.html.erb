@@ -1,0 +1,9 @@
+<h1>Upload Logo</h1>
+
+<%= simple_form_for @logo, :html => { :multipart => true } do |f| %>
+  <%= f.input :title %>
+  <%= f.file_field :logo %>
+  <%= f.submit %>
+
+<% end %>
+
