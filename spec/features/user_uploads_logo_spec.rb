@@ -16,21 +16,35 @@ feature "user uploads logo", %Q{
   # * If I specify the required information, 
   #   the information is saved;
 
-scenario 'unauthenticated user attempts to upload logo' do
-  visit new_logo_path
-  expect(page).to have_content('You need to sign in or sign up before continuing.')
-end
+  scenario 'unauthenticated user attempts to upload logo' do
+    visit new_logo_path
+    expect(page).to have_content('You need to sign in or sign up before continuing.')
+  end 
 
-scenario 'authenticated user attempts to upload logo' do
-  user = FactoryGirl.create(:user)
-  sign_in_as(user)
-  visit new_logo_path
-  fill_in "Title", with: "Launch Academy"
-  attach_file('logo_logo', "#{Rails.root}/spec/support/logo_images/launch_academy_logo.png")
-  click_on "Create Logo"
+  scenario 'authenticated user attempts to upload logo' do
+    count = Logo.count
+    user = FactoryGirl.create(:user)
+    sign_in_as(user)
+    visit new_logo_path
+    fill_in "Title", with: "Launch Academy"
+    attach_file('logo_logo', "#{Rails.root}/spec/support/logo_images/launch_academy_logo.png")
+    click_on "Create Logo"
+    
+    expect(Logo.count).to eql(count +1)
+    expect(current_path).to eql(root_path)
+    expect(page).to have_content("Launch Academy")
+  end
 
-  
-end
+  scenario 'user gets error when form isnt filled' do
+    count = Logo.count
+    user = FactoryGirl.create(:user)
+    sign_in_as(user)
+    visit new_logo_path
+    click_on "Create Logo"
+    
+    expect(Logo.count).to eql(count)
+    expect(page).to have_content("can't be blank")
+  end
 
 end
 
