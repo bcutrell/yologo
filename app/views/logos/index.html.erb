@@ -1,29 +1,10 @@
-<h1>Logos</h1>
 
-
-<table>
-  <thead>
-    <tr>
-      <th>Logo</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div>
     <% @logos.each do |logo| %>
-      <tr>
-        <td><%= logo.title %></td>
-        <td><%= image_tag logo.logo.thumb.url %></td>
-        <td><%= link_to 'Show', logo %></td>
-        <td><%= link_to 'Edit', edit_logo_path(logo) %></td>
-        <td><%= link_to 'Destroy', logo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <ul>
+        <li><%= logo.title %></li>
+        <li><%= image_tag logo.logo.thumb.url %></li>
+      </ul>
     <% end %>
-  </tbody>
-</table>
+</div>
 
-<br>
-
-<%= link_to 'New Logo', new_logo_path %>
