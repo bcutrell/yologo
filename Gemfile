@@ -20,6 +20,8 @@ gem 'carrierwave'
 
 gem 'mini_magick'
 
+gem 'kaminari'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -61,6 +63,7 @@ end
  
 group :test, :development do
   gem 'rspec-rails'
+  gem 'pry-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'shoulda'
