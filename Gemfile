@@ -61,6 +61,7 @@ end
  
 group :test, :development do
   gem 'rspec-rails'
+  gem 'pry-rails'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'shoulda'
