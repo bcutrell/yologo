@@ -1,0 +1,12 @@
+
+<div>
+    <% @logos.each do |logo| %>
+      <ul>
+        <li><%= logo.title %></li>
+        <li><%= image_tag logo.logo.thumb.url %></li>
+      </ul>
+    <% end %>
+</div>
+
+
+<%= paginate @logos %>
