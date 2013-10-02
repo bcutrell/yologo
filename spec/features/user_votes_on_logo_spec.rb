@@ -12,17 +12,19 @@ feature 'user votes/comments on logo', %Q{
 # * If i view the page, up-vote/down-vote, or just browse, it is NOT a requirement to leave a review (hence optionally).
 # * Must be a user to review
 # * Comment gets posted on the logo page
-# * GIves no error if no review
+# * Gives no error if no review
 # * Can only write a review if they vote
 # * Review is optional--> Vote can be submitted with empty comment.
 
   scenario'user votes on logo' do
+    user = FactoryGirl.create(:user)
     logo = FactoryGirl.create(:logo, :with_logo)
     vote = FactoryGirl.create(:vote)
 
+    sign_in_as(user)
+
     prev_vote_count = logo.votes.count
     visit logos_path
-    save_and_open_page
 
     find('.image_link').click
     expect(page).to have_content(logo.logo)

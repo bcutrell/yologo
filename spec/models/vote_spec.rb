@@ -15,5 +15,3 @@ describe Vote do
   it{should_not have_valid(:vote).when(nil, 'hello')}
 
 end
-
-end
