@@ -9,6 +9,10 @@ class LogosController < ApplicationController
     @logo = Logo.new
   end
 
+  def show
+     @logo = Logo.find(params[:id])    
+  end
+
   def create
     @logo = Logo.new(logo_params)
 
