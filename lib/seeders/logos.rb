@@ -10,12 +10,12 @@ module Seeders
           if logo.nil?
             logo = Logo.new
             logo.title = attributes[:title]
-            image = File.open(File.join(Rails.root, attributes[:logo])) 
+            image = File.open(File.join(Rails.root, attributes[:logo]))
             logo.logo = image
           else
             logo.update_attributes(attributes)
           end
-          logo.save
+          logo.save!
         end
       end
 
