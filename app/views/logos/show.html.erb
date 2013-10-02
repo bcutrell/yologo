@@ -1,5 +1,15 @@
-
-
 <%= image_tag @logo.logo.thumb.url, :class => "img-polaroid" %>
 <%= @logo.title %>
 
+<%= simple_form_for [@logo, @logo.reviews.build] do |f| %>
+  <%= f.submit 'Like', class: "btn" %>
+  <%= f.submit 'Dislike', class: "btn" %>
+<% end %>
+
+<% if !@logo.reviews.nil? && @logo.reviews.first.user_id == current_user.id %>
+  <%= @logo.reviews.sum("vote") %>
+  <%= simple_form_for [@logo, @logo.reviews.first ]  do |f| %>
+    <%= f.input :comment %>
+    <%= f.submit 'Comment', class: "btn" %>
+  <% end %>
+<% end %> 

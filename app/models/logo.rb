@@ -5,4 +5,10 @@ class Logo < ActiveRecord::Base
 
   mount_uploader :logo, LogoUploader
 
+  belongs_to :user,
+    inverse_of: :logo
+
+  has_many :reviews,
+    inverse_of: :logo
+
 end

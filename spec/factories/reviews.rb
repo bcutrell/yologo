@@ -1,9 +1,10 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :vote do
+  factory :review do
     user_id 1
-    review_id 1
-    rating 1
+    logo_id 1
+    comment "MyText"
+    vote 1
   end
 end

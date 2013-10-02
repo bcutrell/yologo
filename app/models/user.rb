@@ -5,4 +5,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   mount_uploader :avatar, AvatarUploader
+
+  has_many :votes,
+    inverse_of: :user    
+
+  has_many :reviews,
+    inverse_of: :user
+
+  has_many :logos,
+    inverse_of: :user
+
 end

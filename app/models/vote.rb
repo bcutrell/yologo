@@ -5,9 +5,9 @@ class Vote < ActiveRecord::Base
 
   validates_presence_of :user_id
   validates_presence_of :review_id
-  validates_presence_of :vote
+  validates_presence_of :rating
 
-  validates :vote, numericality: {greater_than_or_equal_to: -1, less_than_or_equal_to: 1}
+  validates :rating, numericality: {greater_than_or_equal_to: -1, less_than_or_equal_to: 1}
   validates_numericality_of :user_id
   validates_numericality_of :review_id
   
