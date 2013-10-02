@@ -16,3 +16,16 @@ body { padding-top: 60px; }
 .navbar .brand {
   color: #ecf0f1;
 }
+
+.logo_index li
+{
+  list-style: none;
+  text-align: center;
+  padding: 5px;
+  vertical-align: middle;
+}
+
+.logo_index li:nth-child(2) img
+{
+  display:block
+}

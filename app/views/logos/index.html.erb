@@ -1,12 +1,16 @@
 
-<div>
-    <% @logos.each do |logo| %>
-      <ul>
-        <li><%= logo.title %></li>
-        <li><%= image_tag logo.logo.thumb.url %></li>
-      </ul>
-    <% end %>
+<% @logos.each do |logo| %>
+  <div class = "span3.5 logo_index">
+
+    <ul>
+      <li ><%= logo.title %></li>        
+      <li><%= image_tag logo.logo.thumb.url, :class => "img-polaroid" %></li>
+    </ul>
+
+  </div>
+<% end %>
 </div>
 
-
-<%= paginate @logos %>
+<div class = >
+<%= paginate @logos%>
+</div>
