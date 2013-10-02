@@ -36,7 +36,7 @@ class LogoUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
    version :thumb do
-     process resize_to_scale: [300, 200]
+     process resize_to_limit: [300, 200]
    end
 
   # Add a white list of extensions which are allowed to be uploaded.
