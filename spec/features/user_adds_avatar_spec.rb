@@ -17,7 +17,6 @@ scenario 'I upload an avatar' do
   user = FactoryGirl.create(:user, :with_avatar)
   sign_in_as(user)
 
-  save_and_open_page
   expect(page).to have_image user.avatar.thumb.url
 end
 end
