@@ -5,6 +5,7 @@
     <ul>
       <li ><%= logo.title %></li>        
       <li><%= image_tag logo.logo.thumb.url, :class => "img-polaroid" %></li>
+        <li><%= link_to 'Vote', logo_path(logo), :class =>"btn" %></li>
     </ul>
 
   </div>

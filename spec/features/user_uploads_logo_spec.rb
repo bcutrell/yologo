@@ -35,6 +35,8 @@ feature "user uploads logo", %Q{
     expect(page).to have_content("Launch Academy")
   end
 
+  #TODO: scenario to ensure the logo is valid
+
   scenario 'user gets error when form isnt filled' do
     count = Logo.count
     user = FactoryGirl.create(:user)
