@@ -9,6 +9,10 @@ FactoryGirl.define do
     trait :with_avatar do 
       avatar { Rack::Test::UploadedFile.new(File.join(Rails.root,'spec', 'support', 'avatar_images', 'avatar.jpg'))}
     end
+
+    trait :as_admin do 
+      admin true 
+    end
   end
 end
 

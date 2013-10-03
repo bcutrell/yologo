@@ -25,10 +25,18 @@
             <li><%= link_to 'Sign In', new_user_session_path %></li>
             <%- else -%>
             <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+
+            <%- if current_user.admin? -%>
+            <li>review logos</li>
+            <%- end -%>
+
             <li>
               <%= image_tag current_user.avatar.thumb.url %>
             </li>
             <%- end -%>
+
+
+
           </ul>
         </div>
       </div>
