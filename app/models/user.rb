@@ -15,4 +15,6 @@ class User < ActiveRecord::Base
   has_many :logos,
     inverse_of: :user
 
+  validates_presence_of :username
+
 end

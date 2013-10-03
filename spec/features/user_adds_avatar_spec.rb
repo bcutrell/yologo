@@ -13,11 +13,18 @@ So that I can display my personality via an image} do
 # * Other yologians will see my avatar when I post a comment
 # * If I try to upload an invalid photo, I will recieve an error message
 
-scenario 'I upload an avatar' do 
-  user = FactoryGirl.create(:user, :with_avatar)
-  sign_in_as(user)
+  scenario 'I upload an avatar' do 
 
-  #TODO: implement the uploading feature
-  expect(page).to have_image user.avatar.thumb.url
-end
+
+    visit new_user_registration_path
+    fill_in 'Username', with: "ben"
+    fill_in 'Email', with: "ben@yahoo.com"
+    fill_in 'user_password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
+    attach_file('user_avatar', "#{Rails.root}/spec/support/avatar_images/avatar.jpg")
+    click_button 'Sign up'
+
+    expect(page).to have_image User.all.first.avatar.thumb.url
+    expect(User.all.first.avatar).to_not eql(nil)
+  end
 end
