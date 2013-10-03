@@ -18,16 +18,27 @@ feature "admin reviews logos", %Q{
     admin = FactoryGirl.create(:user, :as_admin)
 
     visit new_user_session_path
-
     fill_in 'Email', with: admin.email
     fill_in 'Password', with: admin.password
     click_button 'Sign in'
 
     visit root_path
-
+    expect(logo.state).to eql('submitted')
     expect(page).to have_content(logo.title)
-    save_and_open_page
+    select('approved', :from => 'State')
+    click_on 'Update Logo'
+    expect(logo.approve).to eql(true)
+    expect(logo.state).to eql('approved')
 
+  end
+
+  scenario 'user cannot see unreviewed logos' do
+    logo = FactoryGirl.create(:logo, :with_logo)
+    user = FactoryGirl.create(:user)
+
+    visit root_path
+    expect(logo.state).to eql('submitted')
+    expect(page).to_not have_content(logo.title)
   end
 
 end

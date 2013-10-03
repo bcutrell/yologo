@@ -29,6 +29,9 @@ feature "user uploads logo", %Q{
     fill_in "Title", with: "Launch Academy"
     attach_file('logo_logo', "#{Rails.root}/spec/support/logo_images/launch_academy_logo.png")
     click_on "Create Logo"
+    Logo.first.update(state: "approved")
+
+    visit root_path
     
     expect(Logo.count).to eql(count +1)
     expect(current_path).to eql(root_path)

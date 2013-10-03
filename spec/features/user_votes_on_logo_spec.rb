@@ -18,7 +18,7 @@ feature 'user votes/comments on logo', %Q{
 
     scenario'user votes on logo' do
         user = FactoryGirl.create(:user)
-        logo = FactoryGirl.create(:logo, :with_logo)
+        logo = FactoryGirl.create(:logo, :with_logo, :approved)
 
         sign_in_as(user)
         visit logos_path
@@ -33,7 +33,7 @@ feature 'user votes/comments on logo', %Q{
 
     scenario 'user comments on logo' do 
         
-        logo=FactoryGirl.create(:logo, :with_logo)
+        logo=FactoryGirl.create(:logo, :with_logo, :approved)
         user=FactoryGirl.create(:user)
 
         visit root_path

@@ -11,13 +11,13 @@ feature "user views logos", %Q{
   # * I don't have to be authenticated to view the page;
 
   scenario 'unauthenticated user views logos' do
-    logo = FactoryGirl.create(:logo, :with_logo)
+    logo = FactoryGirl.create(:logo, :with_logo, :approved)
     visit root_path
     expect(page).to have_content(logo.title)
   end
 
   scenario 'authenticated user views logos' do
-    logo = FactoryGirl.create(:logo, :with_logo)
+    logo = FactoryGirl.create(:logo, :with_logo, :approved)
     user = FactoryGirl.create(:user)
     sign_in_as(user)
     visit root_path

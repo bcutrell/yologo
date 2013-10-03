@@ -2,7 +2,13 @@ class LogosController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @logos = Logo.page params[:page]
+
+    if current_user.present? && current_user.admin?
+      @logos = Logo.where(state: "submitted")
+    else
+      @logos = Logo.where(state: "approved")
+    end
+  
   end
 
   def new
@@ -22,9 +28,15 @@ class LogosController < ApplicationController
     end
   end
 
+  def update
+    @logo = Logo.find(params[:id])
+    @logo.update(params[:state])
+    redirect_to :back
+  end
+
   protected
   def logo_params
-    params.require(:logo).permit(:title, :logo)
+    params.require(:logo).permit(:title, :logo, :state)
   end
 
 end
