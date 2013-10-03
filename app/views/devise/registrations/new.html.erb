@@ -7,7 +7,7 @@
     <%= f.input :username, :required => true, :autofocus => true %>
     <%= f.input :email, :required => true %>
     <%= f.input :password, :required => true %>
-    <%= f.input :password_confirmation, :required => true %>
+    <%= f.input :password_confirmation, :required => true, label_html: { class: "password_confirmation"} %>
     <%= f.file_field :avatar %>
   </div>
 
