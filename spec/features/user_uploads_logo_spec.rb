@@ -42,6 +42,7 @@ feature "user uploads logo", %Q{
     count = Logo.count
     user = FactoryGirl.create(:user)
     sign_in_as(user)
+
     visit new_logo_path
     click_on "Create Logo"
 
@@ -52,12 +53,14 @@ feature "user uploads logo", %Q{
   scenario 'user uploads logo with category' do
     count = Logo.count
     user = FactoryGirl.create(:user)
+    FactoryGirl.create(:category, name: "Technology")
     sign_in_as(user)
+
     visit new_logo_path
 
     fill_in"Title", with: "Launch Academy"
     attach_file('logo_logo', "#{Rails.root}/spec/support/logo_images/launch_academy_logo.png")
-    select "Technology", from: "Sector"
+    check "Technology"
     click_on "Create Logo"
 
     expect(Logo.count).to eql(count + 1)

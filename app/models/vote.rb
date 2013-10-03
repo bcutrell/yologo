@@ -10,5 +10,5 @@ class Vote < ActiveRecord::Base
   validates :rating, numericality: {greater_than_or_equal_to: -1, less_than_or_equal_to: 1}
   validates_numericality_of :user_id
   validates_numericality_of :review_id
-  
+
 end

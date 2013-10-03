@@ -7,3 +7,20 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Seeders::Logos.seed
+
+industries = [
+  "Basic Materials",
+  "Conglomerates",
+  "Consumer Goods",
+  "Financial",
+  "Healthcare",
+  "Industrial Goods",
+  "Services",
+  "Technology",
+  "Utilities" ]
+
+industries.each do |industry|
+  category = Category.create(name: industry)
+
+
+end
