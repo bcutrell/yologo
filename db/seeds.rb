@@ -20,7 +20,10 @@ industries = [
   "Utilities" ]
 
 industries.each do |industry|
-  category = Category.create(name: industry)
-
+  category = Category.where(name:industry)
+  if category.empty?
+    category = Category.create(name: industry)
+    category.save!
+  end
 
 end
