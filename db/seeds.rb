@@ -17,7 +17,8 @@ industries = [
   "Industrial Goods",
   "Services",
   "Technology",
-  "Utilities" ]
+  "Utilities",
+  "Sports" ]
 
 industries.each do |industry|
   category = Category.where(name:industry)

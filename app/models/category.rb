@@ -8,7 +8,8 @@ class Category < ActiveRecord::Base
   "Industrial Goods",
   "Services",
   "Technology",
-  "Utilities" ]
+  "Utilities",
+  "Sports" ]
 
   has_many :categorizations
 
