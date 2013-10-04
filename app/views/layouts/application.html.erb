@@ -20,13 +20,7 @@
         <div class="nav-collapse">
           <ul class="nav pull-right">
 
-            <%= search_form_for @search do |f| %>
-              <li class="field">
-                <%= f.label :title_cont, "Title:" %>
-                <%= f.text_field :title_cont %>
-              </li>
-              <li class="actions"><%= f.submit "Search" %></li>
-            <% end %>
+
 
             <li><%= link_to 'New Logo', new_logo_path %></li>
             <%- if !user_signed_in? -%>

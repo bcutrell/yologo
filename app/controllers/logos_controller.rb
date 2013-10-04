@@ -2,16 +2,12 @@ class LogosController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-
     @search = Logo.search(params[:q])
-
     if current_user.present? && current_user.admin?
-      @logos = Logo.where(state: "submitted").page(params[:page])
+      @logos = @search.result.where(state: "submitted").page(params[:page])
     else
       @logos = @search.result.where(state: "approved").page(params[:page])
-      # Logo.where(state: "approved").page(params[:page])
     end
-
   end
 
   def new

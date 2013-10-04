@@ -11,10 +11,12 @@ feature 'user searches logos', %Q{
   # * I can enter a search query to search logos by title;
   # * matching logos are displayed on the index page.
 
-  scenario 'can enter a title and view results' do
-    logo_one = FactoryGirl.create(:logo, :with_logo, :approved, title: 'GE')
-    logo_two = FactoryGirl.create(:logo, :with_logo, :approved, title: 'Launch Academy')
-    logo_three = FactoryGirl.create(:logo, :with_logo, title: 'CVS')
+  let!(:logo_one) {FactoryGirl.create(:logo, :with_logo, :approved, title: 'GE')}
+  let!(:logo_two) {FactoryGirl.create(:logo, :with_logo, :approved, title: 'Launch Academy')}
+  let!(:logo_three) {FactoryGirl.create(:logo, :with_logo, title: 'CVS')}
+  let!(:admin) {FactoryGirl.create(:user, :as_admin)}
+
+  scenario 'unregistered user can enter a title and view results' do
 
     visit root_path
     expect(page).to have_content(logo_one.title)
@@ -25,6 +27,38 @@ feature 'user searches logos', %Q{
     click_on 'Search'
 
     expect(page).to have_content(logo_one.title)
+    expect(page).to_not have_content(logo_two.title)
+    expect(page).to_not have_content(logo_three.title)
+  end
+
+  scenario 'admin can enter a title and view results' do
+
+    sign_in_as(admin)
+
+    visit root_path
+    expect(page).to have_content(logo_three.title)
+    expect(page).to_not have_content(logo_one.title)
+
+    fill_in 'Title:', with: logo_three.title
+    click_on 'Search'
+
+
+    expect(page).to have_content(logo_three.title)
+    expect(page).to_not have_content(logo_one.title)
+  end
+
+  scenario 'search result has no matches' do
+
+    visit root_path
+    expect(page).to have_content(logo_one.title)
+    expect(page).to have_content(logo_two.title)
+    expect(page).to_not have_content(logo_three.title)
+
+    fill_in 'Title:', with: "stuff"
+    click_on 'Search'
+
+    expect(page).to have_content("There are no logos with that title.")
+    expect(page).to_not have_content(logo_one.title)
     expect(page).to_not have_content(logo_two.title)
     expect(page).to_not have_content(logo_three.title)
   end
