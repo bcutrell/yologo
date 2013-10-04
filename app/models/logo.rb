@@ -11,11 +11,4 @@ class Logo < ActiveRecord::Base
   has_many :reviews,
     inverse_of: :logo
 
-  has_many :categorizations
-
-  has_many :categories,
-    through: :categorizations
-
-
-
 end

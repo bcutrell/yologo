@@ -10,7 +10,7 @@ class LogosController < ApplicationController
   end
 
   def show
-    @logo = Logo.find(params[:id])
+    @logo = Logo.find(params[:id]) 
   end
 
   def create

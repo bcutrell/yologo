@@ -41,7 +41,6 @@ feature "user uploads logo", %Q{
     count = Logo.count
     user = FactoryGirl.create(:user)
     sign_in_as(user)
-
     visit new_logo_path
     click_on "Create Logo"
     
