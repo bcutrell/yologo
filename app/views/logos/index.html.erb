@@ -4,7 +4,7 @@
 
     <ul>
       <li ><%= logo.title %></li>
-      <li ><%= logo.categories.name %></li>
+      <li ><%= logo.categories.map {|category| category.name}.join ' ' %></li>
 
       <li class="img-polaroid" ><%= image_tag logo.logo.thumb.url%></li>
         <li><%= link_to 'Vote', logo_path(logo), :class =>"btn" %></li>
