@@ -4,9 +4,9 @@ class LogosController < ApplicationController
   def index
 
     if current_user.present? && current_user.admin?
-      @logos = Logo.where(state: "submitted").page
+      @logos = Logo.where(state: "submitted").page(params[:page])
     else
-      @logos = Logo.where(state: "approved").page
+      @logos = Logo.where(state: "approved").page(params[:page])
     end
   
   end

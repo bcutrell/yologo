@@ -27,7 +27,7 @@
             <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
 
             <%- if current_user.admin? -%>
-            <li>review logos</li>
+            <li><%= link_to 'Admin', root_path %></li>
             <%- end -%>
 
             <li>
