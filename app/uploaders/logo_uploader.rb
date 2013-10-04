@@ -8,7 +8,12 @@ class LogoUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
-  storage :fog
+  # Choose what kind of storage to use for this uploader:
+  if Rails.env.development? || Rails.env.production?
+    storage :fog
+  else
+    storage :file
+  end
 
   include CarrierWave::MimeTypes
   process :set_content_type

@@ -11,16 +11,15 @@ feature "user uploads logo", %Q{
   # * I must specify  required information by filling out a form:
   # * I must specify image upload path
   # * I must specify company name
-  # * I must specify logo category
-  # * If I don't specify all required information,
+  # * If I don't specify all required information, 
   #   I get an error;
-  # * If I specify the required information,
+  # * If I specify the required information, 
   #   the information is saved;
 
   scenario 'unauthenticated user attempts to upload logo' do
     visit new_logo_path
     expect(page).to have_content('You need to sign in or sign up before continuing.')
-  end
+  end 
 
   scenario 'authenticated user attempts to upload logo' do
     count = Logo.count
@@ -30,7 +29,10 @@ feature "user uploads logo", %Q{
     fill_in "Title", with: "Launch Academy"
     attach_file('logo_logo', "#{Rails.root}/spec/support/logo_images/launch_academy_logo.png")
     click_on "Create Logo"
+    Logo.first.update(state: "approved")
 
+    visit root_path
+    
     expect(Logo.count).to eql(count +1)
     expect(current_path).to eql(root_path)
     expect(page).to have_content("Launch Academy")
@@ -42,31 +44,11 @@ feature "user uploads logo", %Q{
     count = Logo.count
     user = FactoryGirl.create(:user)
     sign_in_as(user)
-
     visit new_logo_path
     click_on "Create Logo"
-
+    
     expect(Logo.count).to eql(count)
     expect(page).to have_content("can't be blank")
-  end
-
-  scenario 'user uploads logo with category' do
-    count = Logo.count
-    user = FactoryGirl.create(:user)
-    FactoryGirl.create(:category, name: "Technology")
-    sign_in_as(user)
-
-    visit new_logo_path
-
-    fill_in"Title", with: "Launch Academy"
-    attach_file('logo_logo', "#{Rails.root}/spec/support/logo_images/launch_academy_logo.png")
-    check "Technology"
-    click_on "Create Logo"
-
-    expect(Logo.count).to eql(count + 1)
-    expect(current_path).to eql(root_path)
-    expect(page).to have_content("Launch Academy")
-    expect(page).to have_content("Technology")
   end
 end
 

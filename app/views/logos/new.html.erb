@@ -3,9 +3,6 @@
 <%= simple_form_for @logo, :html => { :multipart => true } do |f| %>
   <%= f.input :title %>
   <%= f.file_field :logo %>
-  <%= f.association :categories, as: :check_boxes %>
-
-
   <%= f.submit %>
 
 <% end %>
