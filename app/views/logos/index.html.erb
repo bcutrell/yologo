@@ -5,14 +5,24 @@
     <ul>
       <li ><%= logo.title %></li>
 
-      <li class="img-polaroid" ><%= image_tag logo.logo.thumb.url%></li>
+      <li class="img-polaroid" ><%= image_tag logo.logo.thumb.url %></li>
+        <li><% if current_user.present? && current_user.admin? %></li>
+          <%= simple_form_for logo do |f| %>
+            <%= f.input :state, collection: Logo.state_machine.states.map(&:name) %>
+            <%= f.submit %>
+          <% end %>
+        <% else %> 
         <li><%= link_to 'Vote', logo_path(logo), :class =>"btn" %></li>
+        <% end %>
+
     </ul>
 
   </div>
 <% end %>
 </div>
 
-<div class = >
-<%= paginate @logos%>
+<div>
+  <%= paginate @logos %>
 </div>
+
+
