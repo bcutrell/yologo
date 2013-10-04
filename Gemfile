@@ -77,3 +77,4 @@ group :test, :development do
   gem 'quiet_assets'
 end
 
+gem 'ransack'
