@@ -2,9 +2,15 @@
 <%= @logo.title %>
 
 <%= simple_form_for [@logo, @logo.reviews.build] do |f| %>
-  <%= f.submit 'Like', class: "btn" %>
-  <%= f.submit 'Dislike', class: "btn" %>
-<% end %>
+  <% if current_user.reviews.where(logo_id: @logo.id).sum("vote") == 0 %> 
+      <%= f.submit 'Like', class: "btn" %>
+      <%= f.submit 'Dislike', class: "btn" %>
+  <% elsif current_user.reviews.where(logo_id: @logo.id).sum("vote") == 1 %>
+    <%= f.submit 'Dislike', class: "btn" %>
+  <% elsif current_user.reviews.where(logo_id: @logo.id).sum("vote") == -1 %>
+    <%= f.submit 'Like', class: "btn" %>
+  <% end %>
+  <% end %>
 <% if !current_user.nil? %>
   <% if !@logo.reviews.nil? && @logo.reviews.first.user_id == current_user.id %>
     <%= @logo.reviews.sum("vote") %>
