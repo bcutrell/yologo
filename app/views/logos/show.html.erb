@@ -1,3 +1,5 @@
+<div class="span4">
+
 <%= image_tag @logo.logo.thumb.url, :class => "img-polaroid" %>
 <%= @logo.title %>
 
@@ -20,3 +22,32 @@
     <% end %>
   <% end %>
 <% end %>
+</div>
+
+
+
+
+<% if @logo.reviews.first.comment != nil %> 
+<div class="row">
+<div class="span6">
+<% @logo.reviews.each do |review| %>
+  <%= review.comment %><br/>
+  <%= simple_form_for [@logo, @logo.reviews.build] do |f| %>
+    <% if review.votes.sum("rating") == 0 %> 
+        <%= f.submit 'Like', class: "btn" %>
+        <%= f.submit 'Dislike', class: "btn" %>
+    <% elsif review.votes.sum("rating") == 1 %>
+      <%= f.submit 'Dislike', class: "btn" %>
+    <% elsif review.votes.sum("rating") == -1 %>
+      <%= f.submit 'Like', class: "btn" %>
+  <% end %>
+  <% end %>
+
+
+
+
+<% end %>
+<% end %>
+
+</div>
+</div>

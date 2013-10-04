@@ -3,27 +3,17 @@ class ReviewsController < ApplicationController
 
   def create
     @logo = Logo.find(params[:logo_id])
-    if @logo.reviews.count == 0
-      @review = @logo.reviews.build
-      @review.user_id = current_user.id
-      if params[:commit] == 'Like'
-        @review.vote = 1
-        @review.save
-      elsif params[:commit] == 'Dislike' 
-        @review.vote = -1
-        @review.save
-      end
-    else
-      @review = current_user.reviews.where(logo_id: @logo.id).first
-      if params[:commit] == 'Like'
-        @review.vote = 1
-        @review.save
-      elsif params[:commit] == 'Dislike' 
-        @review.vote = -1
-        @review.save
-      end
-    end
+    # @review = current_user.reviews.where(logo_id: @logo.id).first
+    # @review ||= @logo.reviews.build{|r| r.user = current_user}
+    #   if params[:commit] == 'Like'
+    #     @review.vote = 1
+    #     @review.save
+    #   elsif params[:commit] == 'Dislike' 
+    #     @review.vote = -1
+    #     @review.save
+    #   end
 
+    @review = Review.record_from_user(current_user, params, @logo)
     redirect_to :back
   end
 

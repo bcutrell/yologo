@@ -14,7 +14,7 @@ feature 'user votes/comments on a review', %Q{
 # * User can only vote once per review.
 
 
-    scenario'user votes on logo' do
+    scenario'user votes on review' do
         user = FactoryGirl.create(:user)
         logo = FactoryGirl.create(:logo, :with_logo, :approved)
 
@@ -23,9 +23,10 @@ feature 'user votes/comments on a review', %Q{
         click_link 'Vote'
         expect(page).to have_content(logo.title)
         click_button('Like')
-
-        expect(logo.reviews.sum("vote")).to eql(1)
-        expect(page).to have_content(logo.reviews.sum("vote"))
+        fill_in "Comment", with: "NICE LOGO DUDE!"
+        click_on "Comment"
+        
+        expect(page).to have_content(logo.reviews.first.comment)
     end
 
 
