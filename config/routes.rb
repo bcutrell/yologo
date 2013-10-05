@@ -1,7 +1,11 @@
 Yologo::Application.routes.draw do
   devise_for :users
   resources :logos do 
-    resources :reviews, only: [:create, :update]
+    resources :reviews, only: [:create, :update] 
+  end
+
+  resources :reviews do 
+    resources :votes, only: [:create, :update]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
