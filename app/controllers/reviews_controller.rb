@@ -3,17 +3,7 @@ class ReviewsController < ApplicationController
 
   def create
     @logo = Logo.find(params[:logo_id])
-    @review = @logo.reviews.build
-    @review.user_id = current_user.id
-
-    if params[:commit] == 'Like'
-      @review.vote = 1
-      @review.save
-    elsif params[:commit] == 'Dislike' 
-      @review.vote = -1
-      @review.save
-    end
-
+    @review = Review.record_from_user(current_user, params, @logo)
     redirect_to :back
   end
 
@@ -25,7 +15,7 @@ class ReviewsController < ApplicationController
     else
         flash[:notice] = "nice try"
     end
-
+    
     redirect_to :back   
   end
 

@@ -23,7 +23,7 @@ feature 'user searches logos', %Q{
     expect(page).to have_content(logo_two.title)
     expect(page).to_not have_content(logo_three.title)
 
-    fill_in 'Title:', with: logo_one.title
+    find("input[placeholder='Title']").set logo_one.title
     click_on 'Search'
 
     expect(page).to have_content(logo_one.title)
@@ -39,9 +39,8 @@ feature 'user searches logos', %Q{
     expect(page).to have_content(logo_three.title)
     expect(page).to_not have_content(logo_one.title)
 
-    fill_in 'Title:', with: logo_three.title
+    find("input[placeholder='Title']").set logo_three.title
     click_on 'Search'
-
 
     expect(page).to have_content(logo_three.title)
     expect(page).to_not have_content(logo_one.title)
@@ -54,7 +53,7 @@ feature 'user searches logos', %Q{
     expect(page).to have_content(logo_two.title)
     expect(page).to_not have_content(logo_three.title)
 
-    fill_in 'Title:', with: "stuff"
+    find("input[placeholder='Title']").set "stuff"
     click_on 'Search'
 
     expect(page).to have_content("There are no logos with that title.")
