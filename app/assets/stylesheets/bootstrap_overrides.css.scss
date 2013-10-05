@@ -35,3 +35,27 @@ body { padding-top: 60px; }
   width: 300px;
   height: 200px;
 }
+
+.logo_show 
+{
+  display:table-cell;
+  vertical-align:middle;
+  width: 300px;
+  height: 200px; 
+  text-align: center;
+}
+
+.logo_vote
+{
+  padding-left: 15px;
+}
+
+.logo_comment
+{
+  margin: 0;
+}
+
+.logo_comment_vote
+{
+  padding-left: 15px
+}

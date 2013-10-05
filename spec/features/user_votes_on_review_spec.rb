@@ -3,7 +3,7 @@ require'spec_helper'
 feature 'user votes/comments on a review', %Q{
     As a registered User
     I want to vote on logo reviews
-    So that bad comments are rewarded and vice versa.
+    So that good comments are rewarded and vice versa.
     } do
 
 # Acceptance Criteria:
@@ -13,8 +13,8 @@ feature 'user votes/comments on a review', %Q{
 # * Can only vote up or down, not both.
 # * User can only vote once per review.
 
-
-    scenario'user votes on review' do
+    scenario'user votes rad on review' do
+        
         user = FactoryGirl.create(:user)
         logo = FactoryGirl.create(:logo, :with_logo, :approved)
 
@@ -25,27 +25,12 @@ feature 'user votes/comments on a review', %Q{
         click_button('Like')
         fill_in "Comment", with: "NICE LOGO DUDE!"
         click_on "Comment"
-        
-        expect(page).to have_content(logo.reviews.first.comment)
-    end
+        click_on('Rad')
 
+        new_vote = Vote.first
 
-    scenario 'user comments on logo' do 
-        
-        logo=FactoryGirl.create(:logo, :with_logo, :approved)
-        user=FactoryGirl.create(:user)
-
-        visit root_path
-
-        sign_in_as(user)
-        click_link 'Vote'
-        expect(page).to have_content(logo.title)
-
-        find_button('Like').visible?
-        click_button('Like')
-        fill_in 'Comment', with: "Really great logo, here"
-        click_button'Comment'
-
-        expect(logo.reviews.first.comment).to eql("Really great logo, here")
+        expect(new_vote.rating).to eql(1)
+        expect(new_vote.user_id).to eql(user.id)
+        expect(new_vote.review_id).to eql(logo.reviews.first.id)
     end
 end
