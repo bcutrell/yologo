@@ -1,22 +1,16 @@
-<%= search_form_for @search do |f| %>
-  <li class="field">
-    <%= f.label :title_cont, "Title:" %>
-    <%= f.text_field :title_cont %>
-  </li>
-  <li class="actions"><%= f.submit "Search" %></li>
-<% end %>
-
-<% @logos.each do |logo| %>
-  <div class = "span3.5 logo_index">
-
+<div class="row">
+  <div class="span3.5 search_box">
     <ul>
-      <li ><%= logo.title %></li>
-
-      <li class="img-polaroid" ><%= image_tag logo.logo.thumb.url %></li>
-        <li><% if current_user.present? && current_user.admin? %></li>
-          <%= simple_form_for logo do |f| %>
-            <%= f.input :state, collection: Logo.state_machine.states.map(&:name) %>
-            <%= f.submit %>
+      <li>
+        <%= search_form_for @search, html: {class: "form-horizontal", role: "form"} do |f| %>
+        <%= f.text_field :title_cont, placeholder: "Title" %>
+        <%= f.submit "Search" %>
+        <% end %>
+    </li>
+  </ul>
+        
+  </div>
+</div>
 
 <% if @logos.blank? %>
   <span>There are no logos with that title.</span>
@@ -26,24 +20,19 @@
       <ul>
         <li ><%= logo.title %></li>
         <li class="img-polaroid" ><%= image_tag logo.logo.thumb.url %></li>
-          <li><% if current_user.present? && current_user.admin? %></li>
+          <% if current_user.present? && current_user.admin? %>
             <%= simple_form_for logo do |f| %>
               <%= f.input :state, collection: Logo.state_machine.states.map(&:name) %>
               <%= f.submit %>
             <% end %>
           <% else %>
-          <li><%= link_to 'Vote', logo_path(logo), :class =>"btn" %></li>
+            <li><%= link_to 'Vote', logo_path(logo), :class =>"btn" %></li>
           <% end %>
-
       </ul>
-
-    </div>
+      </div>
   <% end %>
-  </div>
-<%end%>
+<% end %> 
 
 <div>
   <%= paginate @logos %>
 </div>
-
-
