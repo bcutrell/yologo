@@ -26,6 +26,8 @@ feature 'user votes/comments on a review', %Q{
         fill_in "Comment", with: "NICE LOGO DUDE!"
         click_on "Comment"
         click_on('Rad')
+        expect(page).to have_content(user.username)
+        expect(page).to have_content(user.avatar.thumb.url)
 
         new_vote = Vote.first
 

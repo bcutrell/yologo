@@ -38,9 +38,11 @@
           <div class="logo_comment well">
             <%= review.comment %>
           </div>
-          <div class="row">
-          <div class="span4">
-            <%= simple_form_for [review, review.votes.build] do |f| %>
+        </div>
+
+
+        <div class="span4 vote_row">
+            <%= simple_form_for [review, review.votes.build], class: "rad_bad_buttons" do |f| %>
               <% if review.votes.sum("rating") == 0 %>
                   <%= f.submit 'Rad', class: "btn" %>
                   <%= f.submit 'Bad', class: "btn" %>
@@ -49,8 +51,6 @@
               <% elsif review.votes.sum("rating") == -1 %>
                 <%= f.submit 'Rad', class: "btn" %>
               <% end %>
-          </div>
-          <div class="span8">
               <span class="logo_comment_vote ">
                 <% if !review.votes.nil? %>
                   <%= review.votes.sum("rating") %>
@@ -58,16 +58,19 @@
               </span>
             <% end %>
           <%-commenter = User.where(id: review.user_id).first %>
-          <% if commenter.username != nil%>
-            <%= commenter.username %><%= image_tag commenter.avatar.thumb.url %>
-          <%-else-%>
-            <%= commenter.email %><%= image_tag commenter.avatar.thumb.url %>
-          <% end %>
+          <div class="pull-right">
+            <% if commenter.username != nil%>
+              <%= commenter.username %><%= image_tag commenter.avatar.thumb.url %>
+            <%-else-%>
+              <%= commenter.email %><%= image_tag commenter.avatar.thumb.url %>
+            <% end %>
+          </div>
+
         <% end %>
       <% end %>
       </div>
-    </div>
   </div>
+
 <% end %>
 
-</div>
+
