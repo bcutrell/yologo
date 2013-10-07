@@ -42,14 +42,14 @@
 
 
         <div class="span4 vote_row">
-            <%= simple_form_for [review, review.votes.build], class: "rad_bad_buttons" do |f| %>
+            <%= simple_form_for [review, review.votes.build] do |f| %>
               <% if review.votes.sum("rating") == 0 %>
-                  <%= f.submit 'Rad', class: "btn" %>
-                  <%= f.submit 'Bad', class: "btn" %>
+                  <%= f.submit 'Rad', class: "btn rad_bad_buttons" %>
+                  <%= f.submit 'Bad', class: "btn rad_bad_buttons" %>
               <% elsif review.votes.sum("rating") == 1 %>
-                <%= f.submit 'Bad', class: "btn" %>
+                <%= f.submit 'Bad', class: "btn rad_bad_buttons" %>
               <% elsif review.votes.sum("rating") == -1 %>
-                <%= f.submit 'Rad', class: "btn" %>
+                <%= f.submit 'Rad', class: "btn rad_bad_buttons" %>
               <% end %>
               <span class="logo_comment_vote ">
                 <% if !review.votes.nil? %>
@@ -62,7 +62,7 @@
             <% if commenter.username != nil%>
               <%= commenter.username %><%= image_tag commenter.avatar.thumb.url %>
             <%-else-%>
-              <%= commenter.email %><%= image_tag commenter.avatar.thumb.url %>
+              <%= commenter.email %><%= image_tag commenter.avatar.thumb.url%>
             <% end %>
           </div>
 
