@@ -36,7 +36,7 @@ body { padding-top: 60px; }
   height: 200px;
 }
 
-.search_box ul li 
+.search_box ul li
 {
   padding: 0;
   margin: 0;
@@ -44,12 +44,12 @@ body { padding-top: 60px; }
   padding-left: 25px
 }
 
-.logo_show 
+.logo_show
 {
   display:table-cell;
   vertical-align:middle;
   width: 300px;
-  height: 200px; 
+  height: 200px;
   text-align: center;
 }
 
@@ -66,4 +66,7 @@ body { padding-top: 60px; }
 .logo_comment_vote
 {
   padding-left: 15px
+}
+.name_tag_photo{
+  text-align: right;
 }

@@ -7,58 +7,67 @@
 </div>
 
 <% if !current_user.nil? %>
-<%= simple_form_for [@logo, @logo.reviews.build] do |f| %>
-  <% if current_user.reviews.where(logo_id: @logo.id).sum("vote") == 0 %>
-      <%= f.submit 'Like', class: "btn" %>
+  <%= simple_form_for [@logo, @logo.reviews.build] do |f| %>
+    <% if current_user.reviews.where(logo_id: @logo.id).sum("vote") == 0 %>
+        <%= f.submit 'Like', class: "btn" %>
+        <%= f.submit 'Dislike', class: "btn" %>
+    <% elsif current_user.reviews.where(logo_id: @logo.id).sum("vote") == 1 %>
       <%= f.submit 'Dislike', class: "btn" %>
-  <% elsif current_user.reviews.where(logo_id: @logo.id).sum("vote") == 1 %>
-    <%= f.submit 'Dislike', class: "btn" %>
-  <% elsif current_user.reviews.where(logo_id: @logo.id).sum("vote") == -1 %>
-    <%= f.submit 'Like', class: "btn" %>
-  <% end %>
-     <span class="logo_vote">
-      <%= @logo.reviews.sum("vote") %>
-    </span>
-  <% end %>
-
-  <% if !@logo.reviews.nil? && @logo.reviews.first.user_id == current_user.id %>
-    <%= simple_form_for [@logo, @logo.reviews.first ]  do |f| %>
-      <%= f.input :comment %>
-      <%= f.submit 'Comment', class: "btn" %>
+    <% elsif current_user.reviews.where(logo_id: @logo.id).sum("vote") == -1 %>
+      <%= f.submit 'Like', class: "btn" %>
     <% end %>
-  <% end %>
+       <span class="logo_vote">
+        <%= @logo.reviews.sum("vote") %>
+      </span>
+    <% end %>
 
-</div>
-
-<div class="row">
-  <div class="span4">
-
-    <% @logo.reviews.each do |review| %>
-      <% if review.comment != nil %>
-          <div class="logo_comment well">
-            <%= review.comment %>
-          </div>
-          <%= simple_form_for [review, review.votes.build] do |f| %>
-            <% if review.votes.sum("rating") == 0 %>
-                <%= f.submit 'Rad', class: "btn" %>
-                <%= f.submit 'Bad', class: "btn" %>
-            <% elsif review.votes.sum("rating") == 1 %>
-              <%= f.submit 'Bad', class: "btn" %>
-            <% elsif review.votes.sum("rating") == -1 %>
-              <%= f.submit 'Rad', class: "btn" %>
-            <% end %>
-              <span class="logo_comment_vote">
-            <% if !review.votes.nil? %>
-              <%= review.votes.sum("rating") %>
-            <% end %>
-           </span>
-          <% end %>
-
-
-        <% end %>
-
+    <% if !@logo.reviews.nil? && @logo.reviews.first.user_id == current_user.id %>
+      <%= simple_form_for [@logo, @logo.reviews.first ]  do |f| %>
+        <%= f.input :comment %>
+        <%= f.submit 'Comment', class: "btn" %>
       <% end %>
     <% end %>
 
   </div>
+
+  <div class="row">
+  <div class="span4">
+
+      <% @logo.reviews.each do |review| %>
+        <% if review.comment != nil %>
+          <div class="logo_comment well">
+            <%= review.comment %>
+          </div>
+          <div class="row">
+          <div class="span4">
+            <%= simple_form_for [review, review.votes.build] do |f| %>
+              <% if review.votes.sum("rating") == 0 %>
+                  <%= f.submit 'Rad', class: "btn" %>
+                  <%= f.submit 'Bad', class: "btn" %>
+              <% elsif review.votes.sum("rating") == 1 %>
+                <%= f.submit 'Bad', class: "btn" %>
+              <% elsif review.votes.sum("rating") == -1 %>
+                <%= f.submit 'Rad', class: "btn" %>
+              <% end %>
+          </div>
+          <div class="span8">
+              <span class="logo_comment_vote ">
+                <% if !review.votes.nil? %>
+                  <%= review.votes.sum("rating") %>
+                <% end %>
+              </span>
+            <% end %>
+          <%-commenter = User.where(id: review.user_id).first %>
+          <% if commenter.username != nil%>
+            <%= commenter.username %><%= image_tag commenter.avatar.thumb.url %>
+          <%-else-%>
+            <%= commenter.email %><%= image_tag commenter.avatar.thumb.url %>
+          <% end %>
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 </div>

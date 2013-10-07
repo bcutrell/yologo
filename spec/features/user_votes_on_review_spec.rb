@@ -14,7 +14,7 @@ feature 'user votes/comments on a review', %Q{
 # * User can only vote once per review.
 
     scenario'user votes rad on review' do
-        
+
         user = FactoryGirl.create(:user)
         logo = FactoryGirl.create(:logo, :with_logo, :approved)
 
