@@ -32,13 +32,14 @@ class Review < ActiveRecord::Base
 
 
   def rating_count(user, logo)
-    if user_check(user)
+    # if user_check(user)
       user.votes.each do |vote|
         if vote.review.logo == logo
+          binding.pry
           return vote.rating
         end
       end
-    end
+    # end
   end
 
 end
