@@ -10,6 +10,8 @@ gem 'pg'
 
 gem 'bootstrap-sass', '~> 2.3.2.1'
 
+gem'flat-ui-rails'
+
 gem 'simple_form'
 
 gem 'devise'

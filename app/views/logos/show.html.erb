@@ -20,9 +20,9 @@
         <%= @logo.reviews.sum("vote") %>
       </span>
     <% end %>
-
-    <% if !@logo.reviews.nil? && @logo.reviews.first.user_id == current_user.id %>
-      <%= simple_form_for [@logo, @logo.reviews.first ]  do |f| %>
+    <% current_user_review = @logo.reviews.where(user_id: current_user.id).first %>
+    <% if @logo.reviews != [] && !current_user_review.nil? %>
+      <%= simple_form_for [@logo, current_user_review ]  do |f| %>
         <%= f.input :comment %>
         <%= f.submit 'Comment', class: "btn" %>
       <% end %>
