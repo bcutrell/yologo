@@ -26,6 +26,8 @@ gem 'fog'
 
 gem 'kaminari'
 
+gem'flat-ui-rails'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
