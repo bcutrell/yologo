@@ -14,7 +14,7 @@ feature 'user votes/comments on a review', %Q{
 # * User can only vote once per review.
 
     scenario'user votes rad on review' do
-        
+
         user = FactoryGirl.create(:user)
         logo = FactoryGirl.create(:logo, :with_logo, :approved)
 
@@ -26,6 +26,8 @@ feature 'user votes/comments on a review', %Q{
         fill_in "Comment", with: "NICE LOGO DUDE!"
         click_on "Comment"
         click_on('Rad')
+        expect(page).to have_content(user.username)
+        expect(page).to have_content(user.avatar.thumb.url)
 
         new_vote = Vote.first
 
