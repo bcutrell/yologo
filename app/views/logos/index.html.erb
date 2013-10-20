@@ -4,11 +4,11 @@
       <li>
         <%= search_form_for @search, html: {class: "form-horizontal", role: "form"} do |f| %>
         <%= f.text_field :title_cont, placeholder: "Title" %>
-        <%= f.submit "Search" %>
+        <%= f.submit "Search", class: "btn" %>
         <% end %>
     </li>
   </ul>
-        
+
   </div>
 </div>
 
@@ -31,7 +31,7 @@
       </ul>
       </div>
   <% end %>
-<% end %> 
+<% end %>
 
 <div>
   <%= paginate @logos %>

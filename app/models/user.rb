@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   has_many :votes,
-    inverse_of: :user    
+    inverse_of: :user
 
   has_many :reviews,
     inverse_of: :user
@@ -16,5 +16,9 @@ class User < ActiveRecord::Base
     inverse_of: :user
 
   validates_presence_of :username
+
+  def review_score_for_logo(logo)
+    self.reviews.where(logo_id: logo.id).sum("vote")
+  end
 
 end
