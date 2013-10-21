@@ -1,28 +1,33 @@
-== README
+YOLOGO
+===================
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Yologo is a logo rating application where authenticated users can vote and comment on logos. Users can also upload their own logos and rate eachothers comments.
 
-Things you may want to cover:
+Index
+-------------------
+![screenshot](http://i.imgur.com/aGHjNqq.png)
 
-* Ruby version
+Comments
+-------------------
+![screenshot](http://i.imgur.com/5WVvQG2.png)
 
-* System dependencies
+ER Diagram
+-------------------
+![screenshot](http://i.imgur.com/DLEwBbv.png)
 
-* Configuration
+Next steps:
 
-* Database creation
++ Clean up the view and controller logic by adding model methods that can account for user voting
 
-* Database initialization
++ Update the index page so that it includes a YOLOGO (the top rated logo) and an ONOLOGO (the worst rated logo), next to each logo should be the top rated comment for that logo
 
-* How to run the test suite
+Yologo was developed by the following Launch Academy students:
 
-* Services (job queues, cache servers, search engines, etc.)
+bcutrell      
+BaltimoreBirds      
+ksdaly      
+oismail91       
 
-* Deployment instructions
-
-* ...
+With special thanks to our manager, dpickett
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
